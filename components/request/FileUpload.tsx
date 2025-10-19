@@ -184,14 +184,17 @@ export default function FileUpload({
 
           {uploadProgress < 100 && (
             <div className={styles.progressContainer}>
-              <div className={styles.progressBar}>
+              <div 
+                className={styles.progressBar}
+                role="progressbar"
+                aria-label="Upload progress"
+                aria-valuenow={uploadProgress}
+                aria-valuemin={0}
+                aria-valuemax={100}
+              >
                 <div
                   className={styles.progressFill}
                   style={{ width: `${uploadProgress}%` }}
-                  role="progressbar"
-                  aria-valuenow={uploadProgress}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
                 />
               </div>
               <span className={styles.progressText}>{uploadProgress}%</span>

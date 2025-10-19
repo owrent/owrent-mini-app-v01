@@ -92,6 +92,43 @@ After completing onboarding, users are presented with two financing options:
 - `app/request/request.module.css` - Styling for request page
 - `components/request/TypeSelector.module.css` - Styling for type selector
 
+### File Upload
+
+The app includes a drag-and-drop file upload component for invoice documents:
+
+**Features:**
+- Drag-and-drop interface with visual feedback
+- Click to browse file selection
+- File type validation (PDF, CSV, PNG, JPG)
+- File size validation (max 10MB configurable)
+- Upload progress indicator
+- Image preview for uploaded images
+- File type icons for PDF/CSV
+- Remove uploaded file option
+- Keyboard accessible
+- Mobile responsive
+
+**Supported File Types:**
+- PDF documents
+- CSV files
+- PNG images
+- JPG/JPEG images
+
+**Implementation:**
+- `components/request/FileUpload.tsx` - File upload component
+- `components/request/FileUpload.module.css` - Styling for file upload
+
+**Usage:**
+```tsx
+import FileUpload from "~~/components/request/FileUpload";
+
+<FileUpload
+  onFileSelect={(file) => console.log("File selected:", file)}
+  acceptedTypes={["application/pdf", "text/csv", "image/png", "image/jpeg"]}
+  maxSizeMB={10}
+/>
+```
+
 ## Customization
 
 ### Update Manifest Configuration
