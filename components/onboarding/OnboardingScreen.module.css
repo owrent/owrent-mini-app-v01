@@ -1,0 +1,323 @@
+.screen {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a202c;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: #4a5568;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Welcome Screen */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f7fafc;
+  border-radius: 8px;
+}
+
+.featureIcon {
+  font-size: 2rem;
+}
+
+.featureText {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+/* Factoring Explainer */
+.comparisonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comparisonCard {
+  padding: 1.5rem;
+  background: #f7fafc;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+}
+
+.comparisonTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #667eea;
+  margin-bottom: 0.75rem;
+}
+
+.comparisonDescription {
+  font-size: 0.9375rem;
+  color: #4a5568;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.comparisonHighlight {
+  padding: 0.75rem;
+  background: #edf2f7;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+  color: #2d3748;
+}
+
+.comparisonList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comparisonList li {
+  padding: 0.5rem 0;
+  font-size: 0.9375rem;
+  color: #4a5568;
+}
+
+/* Attestation Explainer */
+.benefitsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.benefit {
+  text-align: center;
+}
+
+.benefitIcon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.benefitTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.benefitText {
+  font-size: 0.9375rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+/* SEPA Explainer */
+.flowContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.flowStep {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.flowNumber {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: #667eea;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.flowContent {
+  flex: 1;
+}
+
+.flowTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.flowText {
+  font-size: 0.9375rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.flowArrow {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #cbd5e0;
+  margin: 0.5rem 0;
+}
+
+.securityNote {
+  padding: 1rem;
+  background: #f0fff4;
+  border: 2px solid #9ae6b4;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  color: #2f855a;
+  line-height: 1.5;
+}
+
+/* Fee Disclosure */
+.feeTable {
+  background: #f7fafc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.feeRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.feeLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.feeLabel strong {
+  font-size: 1rem;
+  color: #2d3748;
+}
+
+.feeDescription {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.feeValue {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #667eea;
+}
+
+.feeDivider {
+  height: 2px;
+  background: #e2e8f0;
+  margin: 0.5rem 0;
+}
+
+.exampleBox {
+  padding: 1.5rem;
+  background: #edf2f7;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.exampleTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.75rem;
+}
+
+.exampleText {
+  font-size: 0.9375rem;
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+
+.exampleList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exampleList li {
+  padding: 0.5rem 0;
+  font-size: 0.9375rem;
+  color: #4a5568;
+}
+
+.exampleTotal {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 2px solid #cbd5e0;
+  font-size: 1.125rem !important;
+  color: #667eea !important;
+}
+
+.guaranteeNote {
+  padding: 1rem;
+  background: #fef5e7;
+  border: 2px solid #f9e79f;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  color: #7d6608;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .screen {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 0.9375rem;
+  }
+
+  .icon {
+    font-size: 3rem;
+  }
+
+  .comparisonContainer {
+    gap: 1rem;
+  }
+
+  .flowStep {
+    gap: 0.75rem;
+  }
+
+  .flowNumber {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+}
