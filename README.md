@@ -184,6 +184,85 @@ formatCurrency(amount: number, currency?: string): string
 calculateEffectiveAnnualRate(duration: number): number
 ```
 
+### SEPA Authorization
+
+The app includes a comprehensive SEPA (Single Euro Payments Area) authorization flow for automatic repayment:
+
+**Features:**
+- Multi-step authorization process (explanation → form → confirmation)
+- IBAN validation with mod-97 checksum verification
+- BIC/SWIFT code validation (optional)
+- Real-time form validation with error messages
+- IBAN masking for security in confirmation view
+- Consent checkbox with legal text
+- Wallet signature simulation for authorization
+- Unique mandate reference generation
+- Mock encryption service for FHEVM integration
+
+**SEPA Flow Steps:**
+
+1. **Explanation Screen** - Educates users about:
+   - Why SEPA authorization is needed
+   - How SEPA protects both parties
+   - Visual flow diagram of the repayment process
+   - Security features (encryption, fixed amounts, refund rights)
+
+2. **Form Screen** - Collects bank details:
+   - Account holder name (required)
+   - IBAN with automatic formatting and validation (required)
+   - BIC/SWIFT code with format validation (optional)
+   - Real-time validation feedback
+   - Security information about encryption
+
+3. **Confirmation Screen** - Reviews and confirms:
+   - Masked IBAN display for security
+   - Exact repayment amount and date
+   - Unique mandate reference
+   - User rights under SEPA regulations
+   - Consent checkbox
+   - Wallet signature request
+
+**Implementation:**
+- `app/sepa/page.tsx` - Main SEPA page with step management
+- `components/sepa/SEPAExplanation.tsx` - Educational explanation component
+- `components/sepa/SEPAForm.tsx` - Bank details form with validation
+- `components/sepa/SEPAConfirmation.tsx` - Confirmation and consent component
+- `services/encryption/sepaService.ts` - Mock encryption service (FHEVM placeholder)
+- `app/sepa/sepa.module.css` - Page styling
+
+**IBAN Validation:**
+- Length check (15-34 characters)
+- Format validation (2 letters, 2 digits, alphanumeric)
+- Mod-97 checksum verification
+- Automatic formatting with spaces
+
+**BIC Validation:**
+- Format: 8 or 11 characters
+- Pattern: 4 letters (bank code) + 2 letters (country) + 2 alphanumeric (location) + optional 3 alphanumeric (branch)
+
+**Security Features:**
+- IBAN masking in confirmation (shows first 4 and last 4 characters)
+- Mock FHEVM encryption service (ready for integration)
+- Wallet signature for cryptographic proof of consent
+- Clear display of user rights and refund options
+
+**Usage:**
+```tsx
+// Navigate to SEPA authorization
+router.push("/sepa");
+
+// SEPA data structure
+interface SEPAFormData {
+  accountHolder: string;
+  iban: string;
+  bic: string;
+}
+```
+
+**Routes:**
+- `/sepa` - SEPA authorization flow
+- Redirects to `/success` after completion
+
 ## Customization
 
 ### Update Manifest Configuration
@@ -230,6 +309,38 @@ To modify the request type selection:
    - Change navigation destination after selection
    - Modify localStorage key for selected type
    - Add additional validation or logic
+
+### Customize SEPA Authorization
+
+To modify the SEPA authorization flow:
+
+1. **Edit Components** - Update components in `components/sepa/`:
+   - `SEPAExplanation.tsx` - Modify educational content and flow diagram
+   - `SEPAForm.tsx` - Adjust form fields, validation rules, or add new fields
+   - `SEPAConfirmation.tsx` - Customize confirmation display and consent text
+
+2. **Styling** - Modify styling files:
+   - `app/sepa/sepa.module.css` - Page layout
+   - `components/sepa/SEPAExplanation.module.css` - Explanation styling
+   - `components/sepa/SEPAForm.module.css` - Form styling
+   - `components/sepa/SEPAConfirmation.module.css` - Confirmation styling
+
+3. **Validation** - Adjust validation in `SEPAForm.tsx`:
+   - Modify IBAN validation rules
+   - Change BIC validation requirements
+   - Add custom validation logic
+   - Update error messages
+
+4. **Flow Logic** - Adjust `app/sepa/page.tsx` to:
+   - Add or remove steps
+   - Change navigation behavior
+   - Modify data handling
+   - Update redirect destination
+
+5. **Encryption Service** - Update `services/encryption/sepaService.ts`:
+   - Replace mock encryption with actual FHEVM integration
+   - Add real encryption logic
+   - Implement secure storage
 
 ## Deployment
 
@@ -311,6 +422,7 @@ To publish your app, create a post in the Base app with your app's URL.
 
 - **[Onboarding Flow](docs/ONBOARDING.md)** - Detailed documentation of the onboarding implementation
 - **[Request Type Selection](docs/REQUEST_TYPE_SELECTION.md)** - Documentation of the financing option selection
+- **[SEPA Authorization](docs/SEPA_AUTHORIZATION.md)** - Complete guide to the SEPA authorization flow
 - **[Contract Configuration](config/contracts.ts)** - Smart contract addresses and ABIs
 
 ## Services
