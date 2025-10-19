@@ -129,6 +129,61 @@ import FileUpload from "~~/components/request/FileUpload";
 />
 ```
 
+### Fee Calculator
+
+The app includes a comprehensive fee calculation service for both invoice factoring and loan requests:
+
+**Features:**
+- Platform fee calculation (0.5% of transaction amount)
+- Settlement fee calculation (0.1% for factoring transactions)
+- Loan interest calculation (0.2% per day, max 30 days)
+- Net amount calculation (what user receives)
+- Repayment amount calculation (what user must repay)
+- Effective annual rate (EAR) calculation for loans
+- Currency formatting utilities
+
+**Fee Structure:**
+- **Platform Fee**: 0.5% of transaction amount (applies to both factoring and loans)
+- **Settlement Fee**: 0.1% for cross-chain factoring transactions
+- **Loan Interest**: 0.2% per day (duration ≤30 days)
+
+**Implementation:**
+- `services/fees/feeCalculator.ts` - Fee calculation service
+- `components/fees/FeeBreakdown.tsx` - Fee breakdown display component
+- `components/fees/FeeBreakdown.module.css` - Styling for fee breakdown
+
+**Usage:**
+```tsx
+import { calculateFees, formatCurrency } from "~~/services/fees/feeCalculator";
+
+// Calculate fees for invoice factoring
+const factoringFees = calculateFees(10000, "factoring");
+console.log("Net amount:", formatCurrency(factoringFees.netAmount));
+console.log("Total fees:", formatCurrency(factoringFees.totalFees));
+
+// Calculate fees for loan
+const loanFees = calculateFees(10000, "loan", 15); // 15 days
+console.log("Interest:", formatCurrency(loanFees.interestAmount));
+console.log("Repayment:", formatCurrency(loanFees.repaymentAmount));
+```
+
+**API Reference:**
+
+```typescript
+// Main fee calculation function
+calculateFees(amount: number, type: "factoring" | "loan", duration?: number): FeeBreakdown
+
+// Individual fee calculations
+calculatePlatformFee(amount: number): number
+calculateSettlementFee(amount: number): number
+calculateInterest(amount: number, duration: number): number
+
+// Utility functions
+getFeeRates(): object
+formatCurrency(amount: number, currency?: string): string
+calculateEffectiveAnnualRate(duration: number): number
+```
+
 ## Customization
 
 ### Update Manifest Configuration
@@ -257,6 +312,51 @@ To publish your app, create a post in the Base app with your app's URL.
 - **[Onboarding Flow](docs/ONBOARDING.md)** - Detailed documentation of the onboarding implementation
 - **[Request Type Selection](docs/REQUEST_TYPE_SELECTION.md)** - Documentation of the financing option selection
 - **[Contract Configuration](config/contracts.ts)** - Smart contract addresses and ABIs
+
+## Services
+
+### Fee Calculator Service
+
+The fee calculator service (`services/fees/feeCalculator.ts`) provides comprehensive fee calculations for the Owrent platform:
+
+**Core Functions:**
+
+- `calculateFees(amount, type, duration?)` - Calculate all fees for a request
+  - Returns: `FeeBreakdown` object with platform fee, settlement fee, interest, net amount, and repayment amount
+  - Validates inputs and throws errors for invalid parameters
+  - Supports both "factoring" and "loan" request types
+
+- `calculatePlatformFee(amount)` - Calculate only the platform fee (0.5%)
+- `calculateSettlementFee(amount)` - Calculate only the settlement fee (0.1%)
+- `calculateInterest(amount, duration)` - Calculate loan interest (0.2% per day)
+- `getFeeRates()` - Get all fee rates as percentages
+- `formatCurrency(amount, currency?)` - Format amounts as currency strings
+- `calculateEffectiveAnnualRate(duration)` - Calculate EAR for loans
+
+**Fee Breakdown Interface:**
+
+```typescript
+interface FeeBreakdown {
+  platformFee: {
+    percentage: number;  // 0.5
+    amount: number;      // Calculated amount
+  };
+  settlementFee?: {      // Only for factoring
+    percentage: number;  // 0.1
+    amount: number;      // Calculated amount
+  };
+  totalFees: number;           // Sum of all fees
+  netAmount: number;           // Amount user receives
+  repaymentAmount: number;     // Amount user must repay
+  interestAmount?: number;     // Only for loans
+}
+```
+
+**Validation:**
+- Amount must be greater than 0
+- Loan duration is required and must be 1-30 days
+- All calculations use precise decimal arithmetic
+- Throws descriptive errors for invalid inputs
 
 ## Learn More
 

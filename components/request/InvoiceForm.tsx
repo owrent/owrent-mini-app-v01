@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { calculateFees } from "../../services/fees/feeCalculator";
+import FeeBreakdown from "../fees/FeeBreakdown";
 import styles from "./InvoiceForm.module.css";
 
 export interface InvoiceFormData {
@@ -30,6 +32,7 @@ export default function InvoiceForm({ onSubmit, onBack, uploadedFile }: InvoiceF
 
   const [errors, setErrors] = useState<Partial<Record<keyof InvoiceFormData, string>>>({});
   const [isOCRProcessing, setIsOCRProcessing] = useState(false);
+  const [showFees, setShowFees] = useState(false);
 
   // Mock OCR extraction when file is uploaded
   useEffect(() => {
@@ -62,7 +65,17 @@ export default function InvoiceForm({ onSubmit, onBack, uploadedFile }: InvoiceF
     if (errors[name as keyof InvoiceFormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
+
+    // Show fees when amount is entered
+    if (name === "amount" && parseFloat(value) > 0) {
+      setShowFees(true);
+    }
   };
+
+  // Calculate fees in real-time
+  const fees = formData.amount && parseFloat(formData.amount) > 0
+    ? calculateFees(parseFloat(formData.amount), "factoring")
+    : null;
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof InvoiceFormData, string>> = {};
@@ -249,6 +262,12 @@ export default function InvoiceForm({ onSubmit, onBack, uploadedFile }: InvoiceF
             )}
           </div>
         </div>
+
+        {showFees && fees && (
+          <div className={styles.feeSection}>
+            <FeeBreakdown fees={fees} requestType="factoring" />
+          </div>
+        )}
 
         <div className={styles.infoBox}>
           <span className={styles.infoIcon}>ℹ️</span>

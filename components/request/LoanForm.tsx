@@ -1,6 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+// import React, { useState, useEffect } from "react";
+import { calculateFees } from "../../services/fees/feeCalculator";
+import FeeBreakdown from "../fees/FeeBreakdown";
 import styles from "./LoanForm.module.css";
 
 export interface LoanFormData {
@@ -26,22 +29,13 @@ export default function LoanForm({ onSubmit, onBack }: LoanFormProps) {
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof LoanFormData, string>>>({});
-  const [calculatedInterest, setCalculatedInterest] = useState<number>(0);
+  const [showFees, setShowFees] = useState(false);
 
-  // Calculate interest based on duration
-  useEffect(() => {
-    const amount = parseFloat(formData.loanAmount);
-    const days = parseInt(formData.duration);
-    
-    if (!isNaN(amount) && !isNaN(days) && amount > 0 && days > 0) {
-      // Simple interest calculation: 0.2% per day (example rate)
-      const dailyRate = 0.002;
-      const interest = amount * dailyRate * days;
-      setCalculatedInterest(interest);
-    } else {
-      setCalculatedInterest(0);
-    }
-  }, [formData.loanAmount, formData.duration]);
+  // Calculate fees in real-time
+  const fees = formData.loanAmount && formData.duration && 
+    parseFloat(formData.loanAmount) > 0 && parseInt(formData.duration) > 0
+    ? calculateFees(parseFloat(formData.loanAmount), "loan", parseInt(formData.duration))
+    : null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -49,6 +43,13 @@ export default function LoanForm({ onSubmit, onBack }: LoanFormProps) {
     
     if (errors[name as keyof LoanFormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+
+    // Show fees when amount and duration are entered
+    if ((name === "loanAmount" || name === "duration") && 
+        parseFloat(formData.loanAmount || value) > 0 && 
+        parseInt(formData.duration || value) > 0) {
+      setShowFees(true);
     }
   };
 
@@ -205,26 +206,9 @@ export default function LoanForm({ onSubmit, onBack }: LoanFormProps) {
           </div>
         </div>
 
-        {calculatedInterest > 0 && (
-          <div className={styles.interestBox}>
-            <div className={styles.interestRow}>
-              <span className={styles.interestLabel}>Loan Amount:</span>
-              <span className={styles.interestValue}>€{parseFloat(formData.loanAmount).toFixed(2)}</span>
-            </div>
-            <div className={styles.interestRow}>
-              <span className={styles.interestLabel}>Duration:</span>
-              <span className={styles.interestValue}>{formData.duration} days</span>
-            </div>
-            <div className={styles.interestRow}>
-              <span className={styles.interestLabel}>Estimated Interest:</span>
-              <span className={styles.interestValue}>€{calculatedInterest.toFixed(2)}</span>
-            </div>
-            <div className={`${styles.interestRow} ${styles.totalRow}`}>
-              <span className={styles.interestLabel}>Total Repayment:</span>
-              <span className={styles.interestValue}>
-                €{(parseFloat(formData.loanAmount) + calculatedInterest).toFixed(2)}
-              </span>
-            </div>
+        {showFees && fees && (
+          <div className={styles.feeSection}>
+            <FeeBreakdown fees={fees} requestType="loan" />
           </div>
         )}
 

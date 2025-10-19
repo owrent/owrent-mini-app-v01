@@ -1,0 +1,200 @@
+.container {
+  width: 100%;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 1rem;
+}
+
+.feeTable {
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.feeRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.feeRow:last-child {
+  border-bottom: none;
+}
+
+.feeRow.totalRow {
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid #cbd5e0;
+  font-weight: 700;
+}
+
+.feeLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: #4a5568;
+}
+
+.tooltipButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.tooltipButton:hover {
+  transform: scale(1.1);
+}
+
+.feeValue {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.percentage {
+  font-size: 0.875rem;
+  color: #718096;
+  font-weight: 600;
+}
+
+.amount {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.tooltip {
+  background: #ebf8ff;
+  border: 1px solid #90cdf4;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltip p {
+  font-size: 0.875rem;
+  color: #2c5282;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.summary {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.summaryLabel {
+  font-size: 0.9375rem;
+  color: #4a5568;
+}
+
+.summaryValue {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.summaryRow.netAmountRow {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  padding: 0.75rem;
+  margin: 0.5rem -1rem;
+  border-radius: 6px;
+}
+
+.summaryRow.netAmountRow .summaryLabel,
+.summaryRow.netAmountRow .summaryValue {
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.summaryRow.repaymentRow {
+  background: #edf2f7;
+  padding: 0.75rem;
+  margin: 0.5rem -1rem 0;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.infoBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #fffaf0;
+  border: 1px solid #fbd38d;
+  border-radius: 8px;
+}
+
+.infoIcon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.infoText {
+  font-size: 0.875rem;
+  color: #744210;
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .feeValue {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
+
+  .percentage {
+    font-size: 0.8125rem;
+  }
+
+  .amount {
+    font-size: 0.875rem;
+  }
+
+  .summaryRow.netAmountRow .summaryLabel,
+  .summaryRow.netAmountRow .summaryValue {
+    font-size: 0.9375rem;
+  }
+
+  .tooltip {
+    font-size: 0.8125rem;
+  }
+}
