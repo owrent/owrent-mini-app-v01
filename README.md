@@ -63,7 +63,34 @@ The app includes a comprehensive 5-step onboarding experience:
 
 **Routes:**
 - `/onboarding` - Multi-step onboarding flow
-- `/request` - Request creation page (redirects here after onboarding)
+- `/request` - Request type selection page (redirects here after onboarding)
+
+### Request Type Selection
+
+After completing onboarding, users are presented with two financing options:
+
+1. **Invoice Factoring** - Sell invoice at a discount for immediate cash
+   - Typical discount rate: 2-10%
+   - Features: Immediate payment, no debt, transfer payment risk, simple transaction
+
+2. **Short-Term Loan** - Borrow against invoice until payment received
+   - Interest rate based on duration (≤30 days)
+   - Features: Keep ownership, flexible repayment, maintain customer relationships
+
+**Key Features:**
+- Visual card-based selection interface
+- Detailed rate information for each option
+- Feature comparison lists
+- "Learn More" links to help page
+- Selected type stored in localStorage
+- Continue button appears after selection
+- Keyboard accessible (Enter/Space to select)
+
+**Implementation:**
+- `app/request/page.tsx` - Main request page with type selection
+- `components/request/TypeSelector.tsx` - Reusable type selector component
+- `app/request/request.module.css` - Styling for request page
+- `components/request/TypeSelector.module.css` - Styling for type selector
 
 ## Customization
 
@@ -92,6 +119,25 @@ To modify the onboarding experience:
    - Change number of steps (update `TOTAL_STEPS`)
    - Modify navigation behavior
    - Change redirect destination
+
+### Customize Request Type Selection
+
+To modify the request type selection:
+
+1. **Edit Component** - Update `components/request/TypeSelector.tsx`:
+   - Modify card content and descriptions
+   - Update rate information
+   - Change feature lists
+   - Customize icons
+
+2. **Styling** - Modify styling files:
+   - `app/request/request.module.css` - Page layout
+   - `components/request/TypeSelector.module.css` - Card styling
+
+3. **Flow Logic** - Adjust `app/request/page.tsx` to:
+   - Change navigation destination after selection
+   - Modify localStorage key for selected type
+   - Add additional validation or logic
 
 ## Deployment
 
@@ -172,6 +218,7 @@ To publish your app, create a post in the Base app with your app's URL.
 ## Documentation
 
 - **[Onboarding Flow](docs/ONBOARDING.md)** - Detailed documentation of the onboarding implementation
+- **[Request Type Selection](docs/REQUEST_TYPE_SELECTION.md)** - Documentation of the financing option selection
 - **[Contract Configuration](config/contracts.ts)** - Smart contract addresses and ABIs
 
 ## Learn More
