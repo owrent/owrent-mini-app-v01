@@ -1,6 +1,6 @@
-# Waitlist Mini App Quickstart
+# Owrent Mini App
 
-This is a demo Mini App application built using OnchainKit and the Farcaster SDK. Build a waitlist sign-up mini app for your company that can be published to the Base app and Farcaster.
+This is the Owrent invoice factoring mini app built using OnchainKit and the Farcaster SDK. The app provides a streamlined onboarding experience for users to understand invoice factoring and create factoring requests.
 
 ## Prerequisites
 
@@ -42,6 +42,29 @@ NEXT_PUBLIC_URL=
 npm run dev
 ```
 
+## Features
+
+### Onboarding Flow
+
+The app includes a comprehensive 5-step onboarding experience:
+
+1. **Welcome Screen** - Introduction to Owrent platform
+2. **Factoring Explainer** - Understanding factoring vs traditional loans
+3. **Attestation Explainer** - Security benefits of blockchain attestations
+4. **SEPA Explainer** - How automatic repayment works
+5. **Fee Disclosure** - Transparent fee structure
+
+**Key Features:**
+- Progress indicator showing current step
+- Previous/Next navigation
+- Skip option (available after first screen)
+- Completion status stored in localStorage
+- Automatic redirect to request page after completion
+
+**Routes:**
+- `/onboarding` - Multi-step onboarding flow
+- `/request` - Request creation page (redirects here after onboarding)
+
 ## Customization
 
 ### Update Manifest Configuration
@@ -51,6 +74,24 @@ The `minikit.config.ts` file configures your manifest located at `app/.well-know
 **Skip the `accountAssociation` object for now.**
 
 To personalize your app, change the `name`, `subtitle`, and `description` fields and add images to your `/public` folder. Then update their URLs in the file.
+
+### Customize Onboarding
+
+To modify the onboarding experience:
+
+1. **Edit Components** - Update content in `components/onboarding/`:
+   - `WelcomeScreen.tsx`
+   - `FactoringExplainer.tsx`
+   - `AttestationExplainer.tsx`
+   - `SEPAExplainer.tsx`
+   - `FeeDisclosure.tsx`
+
+2. **Styling** - Modify `app/onboarding/onboarding.module.css` for visual customization
+
+3. **Flow Logic** - Adjust `app/onboarding/page.tsx` to:
+   - Change number of steps (update `TOTAL_STEPS`)
+   - Modify navigation behavior
+   - Change redirect destination
 
 ## Deployment
 
