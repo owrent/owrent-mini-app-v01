@@ -169,6 +169,13 @@ Go to [base.dev/preview](https://base.dev/preview) to validate your app:
 
 To publish your app, create a post in the Base app with your app's URL.
 
+## Documentation
+
+- **[Onboarding Flow](docs/ONBOARDING.md)** - Detailed documentation of the onboarding implementation
+- **[Contract Configuration](config/contracts.ts)** - Smart contract addresses and ABIs
+
 ## Learn More
 
-For detailed step-by-step instructions, see the [Create a Mini App tutorial](https://docs.base.org/docs/mini-apps/quickstart/create-new-miniapp/) in the Base documentation.
+- [Create a Mini App tutorial](https://docs.base.org/docs/mini-apps/quickstart/create-new-miniapp/) - Base documentation
+- [OnchainKit Documentation](https://onchainkit.xyz) - OnchainKit reference
+- [Farcaster SDK](https://docs.farcaster.xyz) - Farcaster integration guide

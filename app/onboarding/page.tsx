@@ -72,6 +72,7 @@ export default function OnboardingPage() {
         <div className={styles.progressBar}>
           <div
             className={styles.progressFill}
+            // Dynamic width based on current step - inline style needed for real-time updates
             style={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
           />
         </div>
